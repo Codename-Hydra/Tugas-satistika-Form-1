@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survei Genre Game Roblox</title>
+    <meta name="description" content="Survei interaktif untuk mengumpulkan data preferensi genre game Roblox">
+    <meta name="keywords" content="roblox, survey, game, genre, statistics">
+    <meta name="author" content="Codename-Hydra">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Survei Genre Game Roblox">
+    <meta property="og:description" content="Bantu kami memahami preferensi gaming Anda">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://codename-hydra.github.io/Tugas-satistika-Form-1/">
+    <meta property="og:image" content="https://codename-hydra.github.io/Tugas-satistika-Form-1/Screenshot%202025-09-03%20171950.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .qualification-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+
+        .qualification-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .radio-option:hover {
+            background: #ecf0f1;
+            border-color: #3498db;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #3498db;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .main-form {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .genres-section {
+            margin-bottom: 30px;
+        }
+
+        .genres-section h3 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .genre-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .genre-item:hover {
+            border-color: #3498db;
+            background: #e8f4f8;
+        }
+
+        .genre-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 120px;
+        }
+
+        .genre-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #3498db;
+            cursor: pointer;
+        }
+
+        .genre-checkbox label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .time-dropdown {
+            flex: 1;
+            display: none;
+        }
+
+        .time-dropdown select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-dropdown select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .thank-you-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #e8f5e8;
+            border-radius: 15px;
+            border-left: 5px solid #27ae60;
+            color: #27ae60;
+            font-size: 1.2rem;
+            font-weight: 500;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .genre-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .genre-checkbox {
+                min-width: auto;
+            }
+
+            .time-dropdown {
+                width: 100%;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .validation-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Animasi untuk notifikasi */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Style untuk button disabled */
+        .submit-btn:disabled {
+            background: #bdc3c7 !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* GitHub corner */
+        .github-corner {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out;
+        }
+
+        @keyframes octocat-wave {
+            0%, 100% { transform: rotate(0); }
+            20%, 60% { transform: rotate(-25deg); }
+            40%, 80% { transform: rotate(10deg); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- GitHub Corner -->
+    <a href="https://github.com/Codename-Hydra/Tugas-satistika-Form-1" class="github-corner" aria-label="View source on GitHub">
+        <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#3498db; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+            <path d="m0,0 0,250 250,0 0,-250z"/>
+            <path d="m127.5,105c-8.8,0 -16,7.2 -16,16 0,7.1 4.6,13.1 10.9,15.2 0.8,0.1 1.1,-0.4 1.1,-0.8 0,-0.4 0,-1.4 0,-2.7 -4.5,1 -5.4,-2.1 -5.4,-2.1 -0.7,-1.9 -1.8,-2.4 -1.8,-2.4 -1.5,-1 0.1,-1 0.1,-1 1.6,0.1 2.5,1.7 2.5,1.7 1.5,2.5 3.8,1.8 4.7,1.4 0.2,-1.1 0.6,-1.8 1,-2.2 -3.6,-0.4 -7.4,-1.8 -7.4,-8.1 0,-1.8 0.6,-3.2 1.7,-4.4 -0.2,-0.4 -0.7,-2.1 0.2,-4.3 0,0 1.4,-0.4 4.5,1.7 1.3,-0.4 2.7,-0.5 4.1,-0.5 1.4,0 2.8,0.2 4.1,0.5 3.1,-2.1 4.5,-1.7 4.5,-1.7 0.9,2.2 0.3,3.9 0.2,4.3 1,1.1 1.7,2.6 1.7,4.4 0,6.3 -3.8,7.6 -7.4,8 0.6,0.5 1.1,1.5 1.1,3 0,2.2 0,3.9 0,4.5 0,0.4 0.3,0.9 1.1,0.8 6.4,-2.1 10.9,-8.1 10.9,-15.2 0,-8.8 -7.2,-16 -16,-16z" style="fill:#fff"/>
+        </svg>
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Survei Genre Game Roblox</h1>
+            <p>Bantu kami memahami preferensi gaming Anda</p>
+        </div>
+
+        <div class="qualification-section">
+            <h3>Pertanyaan Kualifikasi</h3>
+            <p style="margin-bottom: 15px; color: #34495e;">Apakah Anda bermain Roblox?</p>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="plays-yes" name="plays-roblox" value="ya">
+                    <label for="plays-yes">Ya</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="plays-no" name="plays-roblox" value="tidak">
+                    <label for="plays-no">Tidak</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="thank-you-message" id="thankYouMessage">
+            <p>Terima kasih, survei ini hanya untuk pemain Roblox.</p>
+        </div>
+
+        <div class="main-form" id="mainForm">
+            <div class="genres-section">
+                <h3>Pilih Genre Game yang Anda Mainkan</h3>
+                <p style="margin-bottom: 20px; color: #7f8c8d; font-size: 0.95rem;">
+                    Centang genre yang Anda mainkan dan pilih waktu bermain harian untuk masing-masing genre.
+                </p>
+
+                <div class="genre-item">
+                    <div class="genre-checkbox">
+                        <input type="checkbox" id="action" name="genre" value="Action" onchange="toggleTimeDropdown('action')">
+                        <label for="action">Action</label>
+                    </div>
+                    <div class="time-dropdown" id="time-action">
+                        <select name="time-action">
+                            <option value="">Pilih waktu bermain harian</option>
+                            <option value="30 - 59 Menit">30 - 59 Menit</option>
+                            <option value="60 - 89 Menit">60 - 89 Menit</option>
+                            <option value="90 - 119 Menit">90 - 119 Menit</option>
+                            <option value="120 - 149 Menit">120 - 149 Menit</option>
+                            <option value="150 - 179 Menit">150 - 179 Menit</option>
+                            <option value=">= 180 Menit">>= 180 Menit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="genre-item">
+                    <div class="genre-checkbox">
+                        <input type="checkbox" id="simulation" name="genre" value="Simulation" onchange="toggleTimeDropdown('simulation')">
+                        <label for="simulation">Simulation</label>
+                    </div>
+                    <div class="time-dropdown" id="time-simulation">
+                        <select name="time-simulation">
+                            <option value="">Pilih waktu bermain harian</option>
+                            <option value="30 - 59 Menit">30 - 59 Menit</option>
+                            <option value="60 - 89 Menit">60 - 89 Menit</option>
+                            <option value="90 - 119 Menit">90 - 119 Menit</option>
+                            <option value="120 - 149 Menit">120 - 149 Menit</option>
+                            <option value="150 - 179 Menit">150 - 179 Menit</option>
+                            <option value=">= 180 Menit">>= 180 Menit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="genre-item">
+                    <div class="genre-checkbox">
+                        <input type="checkbox" id="rpg" name="genre" value="RPG" onchange="toggleTimeDropdown('rpg')">
+                        <label for="rpg">RPG</label>
+                    </div>
+                    <div class="time-dropdown" id="time-rpg">
+                        <select name="time-rpg">
+                            <option value="">Pilih waktu bermain harian</option>
+                            <option value="30 - 59 Menit">30 - 59 Menit</option>
+                            <option value="60 - 89 Menit">60 - 89 Menit</option>
+                            <option value="90 - 119 Menit">90 - 119 Menit</option>
+                            <option value="120 - 149 Menit">120 - 149 Menit</option>
+                            <option value="150 - 179 Menit">150 - 179 Menit</option>
+                            <option value=">= 180 Menit">>= 180 Menit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="genre-item">
+                    <div class="genre-checkbox">
+                        <input type="checkbox" id="horror" name="genre" value="Horror" onchange="toggleTimeDropdown('horror')">
+                        <label for="horror">Horror</label>
+                    </div>
+                    <div class="time-dropdown" id="time-horror">
+                        <select name="time-horror">
+                            <option value="">Pilih waktu bermain harian</option>
+                            <option value="30 - 59 Menit">30 - 59 Menit</option>
+                            <option value="60 - 89 Menit">60 - 89 Menit</option>
+                            <option value="90 - 119 Menit">90 - 119 Menit</option>
+                            <option value="120 - 149 Menit">120 - 149 Menit</option>
+                            <option value="150 - 179 Menit">150 - 179 Menit</option>
+                            <option value=">= 180 Menit">>= 180 Menit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="validation-message" id="validationMessage">
+                    Silakan pilih minimal satu genre dan waktu bermainnya.
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="button" class="submit-btn" onclick="submitData()">
+                    🚀 Kirim Data
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Hosted on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> • 
+            Data disimpan dengan <a href="https://developers.google.com/sheets/api" target="_blank">Google Sheets API</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Konfigurasi API untuk GitHub Pages
+        const API_CONFIG = {
+            // Google Apps Script (Primary untuk GitHub Pages)
+            googleScript: 'https://script.google.com/macros/s/AKfycbz8H2ZcXpP6vIqGb_PjT8nRRcjJzSRWYYFzJZB3J8oYHtJVYQMr8bH8WvvF9Qy8tYz3/exec',
+            // Local development (jika ada backend lokal)
+            local: 'http://localhost:9000/api/submit-survey'
+        };
+
+        // Untuk GitHub Pages, gunakan Google Apps Script
+        const CURRENT_API = window.location.hostname === 'codename-hydra.github.io' 
+            ? API_CONFIG.googleScript 
+            : API_CONFIG.local;
+
+        // Menangani perubahan pada pertanyaan kualifikasi
+        document.querySelectorAll('input[name="plays-roblox"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const mainForm = document.getElementById('mainForm');
+                const thankYouMessage = document.getElementById('thankYouMessage');
+                
+                if (this.value === 'ya') {
+                    mainForm.style.display = 'block';
+                    thankYouMessage.style.display = 'none';
+                } else {
+                    mainForm.style.display = 'none';
+                    thankYouMessage.style.display = 'block';
+                }
+            });
+        });
+
+        // Menampilkan/menyembunyikan dropdown waktu bermain
+        function toggleTimeDropdown(genre) {
+            const checkbox = document.getElementById(genre);
+            const timeDropdown = document.getElementById('time-' + genre);
+            const select = timeDropdown.querySelector('select');
+            
+            if (checkbox.checked) {
+                timeDropdown.style.display = 'block';
+            } else {
+                timeDropdown.style.display = 'none';
+                select.value = ''; // Reset pilihan waktu
+            }
+            
+            // Sembunyikan pesan validasi jika ada
+            document.getElementById('validationMessage').style.display = 'none';
+        }
+
+        // Fungsi untuk menampilkan loading state
+        function setLoadingState(isLoading) {
+            const submitBtn = document.querySelector('.submit-btn');
+            
+            if (isLoading) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '⏳ Mengirim data...';
+                submitBtn.style.opacity = '0.7';
+                submitBtn.style.cursor = 'not-allowed';
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '🚀 Kirim Data';
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+            }
+        }
+
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, type = 'success') {
+            // Hapus notifikasi yang ada
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = message;
+            
+            // Style untuk notifikasi
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                max-width: 400px;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                font-weight: 500;
+                animation: slideInRight 0.3s ease-out;
+                ${type === 'success' ? 
+                    'background: linear-gradient(135deg, #27ae60, #2ecc71); color: white;' :
+                    'background: linear-gradient(135deg, #e74c3c, #c0392b); color: white;'
+                }
+            `;
+
+            document.body.appendChild(notification);
+
+            // Auto-hide setelah 5 detik
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Fungsi untuk mengirim data ke Google Apps Script
+        async function sendToGoogleScript(data) {
+            try {
+                const response = await fetch(CURRENT_API, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    return {
+                        success: true,
+                        message: result.message || 'Data berhasil disimpan ke Google Sheets!',
+                        data: result
+                    };
+                } else {
+                    throw new Error(result.message || 'Gagal menyimpan data');
+                }
+
+            } catch (error) {
+                console.error('Error mengirim data ke Google Apps Script:', error);
+                throw error;
+            }
+        }
+
+        // Fungsi untuk fallback lokal (simpan ke localStorage)
+        function saveToLocalStorage(data) {
+            try {
+                const timestamp = new Date().toISOString();
+                const surveyData = {
+                    id: Date.now().toString(),
+                    timestamp: timestamp,
+                    data: data
+                };
+
+                // Ambil data yang sudah ada
+                const existingData = JSON.parse(localStorage.getItem('robloxSurveyData') || '[]');
+                existingData.push(surveyData);
+                
+                // Simpan kembali
+                localStorage.setItem('robloxSurveyData', JSON.stringify(existingData));
+                
+                return {
+                    success: true,
+                    message: 'Data disimpan secara lokal di browser Anda',
+                    id: surveyData.id
+                };
+            } catch (error) {
+                throw new Error('Gagal menyimpan data secara lokal: ' + error.message);
+            }
+        }
+
+        // Fungsi utama untuk mengumpulkan dan mengirim data
+        async function submitData() {
+            const selectedGenres = [];
+            const validationMessage = document.getElementById('validationMessage');
+            
+            // Cek setiap genre yang dicentang
+            const genres = ['action', 'simulation', 'rpg', 'horror'];
+            let hasValidSelection = false;
+            
+            genres.forEach(genre => {
+                const checkbox = document.getElementById(genre);
+                const timeSelect = document.querySelector(`select[name="time-${genre}"]`);
+                
+                if (checkbox.checked) {
+                    const selectedTime = timeSelect.value;
+                    
+                    if (selectedTime) {
+                        selectedGenres.push({
+                            "genre": checkbox.value,
+                            "waktu": selectedTime
+                        });
+                        hasValidSelection = true;
+                    }
+                }
+            });
+            
+            // Validasi: pastikan minimal ada satu genre dengan waktu yang dipilih
+            if (!hasValidSelection) {
+                validationMessage.style.display = 'block';
+                validationMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            // Sembunyikan pesan validasi jika data valid
+            validationMessage.style.display = 'none';
+            
+            // Tampilkan loading state
+            setLoadingState(true);
+            
+            try {
+                console.log('📊 Data Survei Genre Game Roblox:');
+                console.log(JSON.stringify(selectedGenres, null, 2));
+                
+                let result;
+                
+                try {
+                    // Coba kirim ke Google Apps Script atau backend
+                    if (window.location.hostname === 'codename-hydra.github.io') {
+                        // GitHub Pages - gunakan Google Apps Script
+                        result = await sendToGoogleScript(selectedGenres);
+                        showNotification(`✅ ${result.message}<br>📊 Data tersimpan di Google Sheets`);
+                    } else {
+                        // Local development - coba backend dulu
+                        const backendResponse = await fetch(CURRENT_API, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(selectedGenres)
+                        });
+                        
+                        if (backendResponse.ok) {
+                            const backendResult = await backendResponse.json();
+                            showNotification(`✅ ${backendResult.message}<br>📄 ID: ${backendResult.data?.id}`);
+                        } else {
+                            throw new Error('Backend tidak tersedia');
+                        }
+                    }
+                } catch (primaryError) {
+                    console.warn('Primary method gagal, menggunakan localStorage:', primaryError.message);
+                    
+                    // Fallback ke localStorage
+                    result = saveToLocalStorage(selectedGenres);
+                    showNotification(`💾 ${result.message}<br>🔍 Buka Developer Tools → Application → Local Storage untuk melihat data`, 'success');
+                }
+
+                // Reset form setelah sukses
+                setTimeout(() => {
+                    resetForm();
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error lengkap:', error);
+                showNotification(`❌ Gagal menyimpan data: ${error.message}`, 'error');
+            } finally {
+                setLoadingState(false);
+            }
+        }
+
+        // Fungsi untuk reset form
+        function resetForm() {
+            // Reset semua checkbox
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+            
+            // Reset semua dropdown dan sembunyikan
+            document.querySelectorAll('.time-dropdown').forEach(dropdown => {
+                dropdown.style.display = 'none';
+                dropdown.querySelector('select').value = '';
+            });
+            
+            // Reset radio button kualifikasi
+            document.querySelectorAll('input[name="plays-roblox"]').forEach(radio => {
+                radio.checked = false;
+            });
+            
+            // Sembunyikan form utama
+            document.getElementById('mainForm').style.display = 'none';
+            document.getElementById('thankYouMessage').style.display = 'none';
+        }
+
+        // Animasi smooth untuk elemen yang muncul
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tambahkan efek hover untuk genre items
+            document.querySelectorAll('.genre-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(5px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+
+            // Console welcome message
+            console.log('%c🎮 Survei Genre Game Roblox', 'color: #3498db; font-size: 20px; font-weight: bold;');
+            console.log('%cHosted on GitHub Pages', 'color: #27ae60; font-size: 14px;');
+            console.log('%cRepository: https://github.com/Codename-Hydra/Tugas-satistika-Form-1', 'color: #7f8c8d; font-size: 12px;');
+        });
+    </script>
+</body>
+</html>

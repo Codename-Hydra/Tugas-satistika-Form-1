@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Survei Genre Game Roblox</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .demo-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .demo-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 10px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+        .demo-button:hover {
+            transform: translateY(-2px);
+        }
+        .api-test {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .success { color: #27ae60; }
+        .error { color: #e74c3c; }
+        .code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🎮 Demo - Survei Genre Game Roblox</h1>
+        
+        <h2>📋 Status Implementasi</h2>
+        <ul>
+            <li>✅ Frontend form dengan validasi</li>
+            <li>✅ Node.js backend API</li>
+            <li>✅ Google Apps Script integration</li>
+            <li>✅ Multiple deployment options</li>
+            <li>✅ Error handling & loading states</li>
+            <li>✅ Data export (JSON & CSV)</li>
+        </ul>
+
+        <h2>🚀 Quick Links</h2>
+        <a href="survei-genre-roblox.html" class="demo-button">📝 Buka Form Survei</a>
+        <a href="https://your-vercel-app.vercel.app/api/health" class="demo-button" target="_blank">❤️ API Health Check</a>
+        <a href="https://your-vercel-app.vercel.app/api/stats" class="demo-button" target="_blank">📊 View Statistics</a>
+
+        <h2>🧪 Test API</h2>
+        <div class="api-test">
+            <button onclick="testAPI()" class="demo-button">Test Submit Data</button>
+            <button onclick="getStats()" class="demo-button">Get Statistics</button>
+            <div id="api-result"></div>
+        </div>
+
+        <h2>📁 Generated Data Location</h2>
+        <div class="code">backend/data/survey-data-[DATE].json<br>backend/data/survey-data-[DATE].csv</div>
+
+        <h2>🛠️ Quick Setup Commands</h2>
+        <div class="code">
+# Install dependencies<br>
+cd backend<br>
+npm install<br><br>
+
+# Start server<br>
+PORT=8080 npm start<br><br>
+
+# Test API<br>
+curl -X POST http://localhost:8080/api/submit-survey \<br>
+  -H "Content-Type: application/json" \<br>
+  -d '[{"genre":"Action","waktu":"60 - 89 Menit"}]'
+        </div>
+
+        <h2>📊 Deployment Options</h2>
+        <ol>
+            <li><strong>Local Development:</strong> Current setup (localhost:8080)</li>
+            <li><strong>Google Sheets:</strong> Use google-apps-script/Code.gs</li>
+            <li><strong>Cloud Hosting:</strong> Deploy backend to Heroku/Vercel/AWS</li>
+            <li><strong>Static Hosting:</strong> Frontend only dengan localStorage</li>
+        </ol>
+    </div>
+
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = '⏳ Testing API...';
+            
+            try {
+                const testData = [
+                    { genre: 'Action', waktu: '60 - 89 Menit' },
+                    { genre: 'RPG', waktu: '90 - 119 Menit' }
+                ];
+                
+                const response = await fetch('http://localhost:8080/api/submit-survey', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            ✅ API Test Success!<br>
+                            📄 Entry ID: ${result.data.id}<br>
+                            📅 Timestamp: ${result.data.timestamp}<br>
+                            📊 Entries: ${result.data.entries}
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ ${result.message}</div>`;
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+        
+        async function getStats() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.innerHTML = '⏳ Getting statistics...';
+            
+            try {
+                const response = await fetch('http://localhost:8080/api/stats');
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            📊 Statistics:<br>
+                            📝 Total Entries: ${result.stats.totalEntries}<br>
+                            📁 Files: ${result.stats.filesCount}<br>
+                            🎮 Genre Distribution: ${JSON.stringify(result.stats.genreStats, null, 2)}
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ ${result.error}</div>`;
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "roblox-survey-app",
+  "version": "1.0.0",
+  "description": "Interactive Roblox genre survey application with multiple deployment options",
+  "main": "index.html",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "build": "cd backend && npm install",
+    "dev": "cd backend && npm run dev",
+    "deploy": "gh-pages -d .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Codename-Hydra/Tugas-satistika-Form-1.git"
+  },
+  "keywords": [
+    "roblox",
+    "survey",
+    "gaming",
+    "statistics",
+    "frontend",
+    "backend",
+    "api"
+  ],
+  "author": "Codename-Hydra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Codename-Hydra/Tugas-satistika-Form-1/issues"
+  },
+  "homepage": "https://codename-hydra.github.io/Tugas-satistika-Form-1/",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
+}
